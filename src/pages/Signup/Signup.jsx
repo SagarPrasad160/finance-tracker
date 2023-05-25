@@ -14,8 +14,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name, email, password);
-    const user = await signup(email, password, name);
-    console.log(user);
+    await signup(email, password, name);
 
     // reset form data
     setEmail("");

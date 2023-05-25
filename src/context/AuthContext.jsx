@@ -4,7 +4,13 @@ import PropTypes from "prop-types";
 const AuthContext = createContext();
 
 const authReducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
+    case "LOGIN":
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }
@@ -14,6 +20,9 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
   });
+
+  console.log(state);
+
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
