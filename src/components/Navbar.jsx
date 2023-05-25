@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <li className={styles.title}>finance Tracker</li>
+        <li className={styles.title}>financeTracker</li>
         <li>
           <Link to="/login">Login</Link>
         </li>
