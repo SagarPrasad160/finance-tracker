@@ -6,19 +6,33 @@ import Navbar from "./components/Navbar";
 
 import { useAuthContext } from "./context/useAuthContext";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 function App() {
-  const { authIsReady } = useAuthContext();
+  const { authIsReady, user } = useAuthContext();
   return (
     <>
       {authIsReady && (
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/signup"
+              element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
           </Routes>
         </Router>
       )}
