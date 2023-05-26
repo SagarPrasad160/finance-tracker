@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 import { useLogout } from "../hooks/useLogout";
@@ -8,6 +8,8 @@ import { useAuthContext } from "../context/useAuthContext";
 function Navbar() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+
+  const navigate = useNavigate();
   return (
     <nav className={styles.navbar}>
       <ul>
@@ -29,6 +31,15 @@ function Navbar() {
             Hello,{user.displayName}
             <button className="btn" onClick={logout}>
               Logout
+            </button>
+          </li>
+        )}
+        {user && (
+          <li>
+            {" "}
+            <button className="btn" onClick={() => navigate("/profile")}>
+              {" "}
+              Profile
             </button>
           </li>
         )}

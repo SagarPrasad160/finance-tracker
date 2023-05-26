@@ -1,6 +1,7 @@
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
 
 import Navbar from "./components/Navbar";
 
@@ -33,6 +34,7 @@ function App() {
               path="/login"
               element={!user ? <Login /> : <Navigate to="/" />}
             />
+            <Route path="/profile" element={user && <Profile />} />
           </Routes>
         </Router>
       )}
