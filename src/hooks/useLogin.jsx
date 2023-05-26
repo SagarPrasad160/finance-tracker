@@ -1,38 +1,30 @@
 import { useState } from "react";
 
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from "../context/useAuthContext";
 
-function useSignup() {
+function useLogin() {
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const { dispatch } = useAuthContext();
 
-  const signup = async (email, password, displayName) => {
+  const login = async (email, password) => {
     setError(null);
     setIsPending(true);
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const response = await signInWithEmailAndPassword(auth, email, password);
       // check for error if there is no response at all
       if (!response) {
         throw new Error("could not signup");
       }
-
-      // if there are no errors update  display name of the user
-      await updateProfile(auth.currentUser, { displayName });
       // dispatch action to  update the user in AuthContext
       dispatch({ type: "LOGIN", payload: response.user });
 
       // update state
 
       setIsPending(false);
-      console.log("isPending");
     } catch (error) {
       // error thrown by firebase incase of invalid email/password
       console.log(error.message);
@@ -42,7 +34,7 @@ function useSignup() {
     }
   };
 
-  return { isPending, error, signup };
+  return { isPending, error, login };
 }
 
-export default useSignup;
+export default useLogin;

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../context/useAuthContext";
 import { auth } from "../firebase/config";
 import { signOut } from "firebase/auth";
 
 export const useLogout = () => {
+  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
@@ -16,13 +17,23 @@ export const useLogout = () => {
       // signs out user
       await signOut(auth);
       dispatch({ type: "LOGOUT" });
-      setIsPending(false);
+      // update state
+      if (!isCancelled) {
+        setIsPending(false);
+      }
     } catch (error) {
       console.log(error.message);
-      setError(error.message);
-      setIsPending(false);
+      if (!isCancelled) {
+        setError(error.message);
+        setIsPending(false);
+      }
     }
   };
+
+  useEffect(() => {
+    // update isCancelled state when the component unmounts
+    return () => setIsCancelled(true);
+  }, []);
 
   return { logout, isPending, error };
 };
