@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import TransactionContext from "../../context/TransactionsContext";
 
 function TransactionForm() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
 
+  const { addTransaction } = useContext(TransactionContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, amount);
+    addTransaction({ name, amount });
+
+    // reset form
+    setName("");
+    setAmount("");
   };
 
   return (
