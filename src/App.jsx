@@ -14,6 +14,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const { authIsReady, user } = useAuthContext();
   return (
@@ -34,8 +37,12 @@ function App() {
               path="/login"
               element={!user ? <Login /> : <Navigate to="/" />}
             />
-            <Route path="/profile" element={user && <Profile />} />
+            <Route
+              path="/profile"
+              element={user ? <Profile /> : <Navigate to="/login" />}
+            />
           </Routes>
+          <ToastContainer />
         </Router>
       )}
     </>
