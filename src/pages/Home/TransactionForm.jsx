@@ -10,6 +10,7 @@ function TransactionForm() {
     useContext(TransactionContext);
 
   useEffect(() => {
+    // update the transaction form if transaction is in edit mode
     if (isEdit.edit) {
       setName(isEdit.transaction.name);
       setAmount(isEdit.transaction.amount);
@@ -18,7 +19,11 @@ function TransactionForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    removeTransaction(isEdit.transaction.id);
+    // if transaction is being edit remove the existing one from firestore to add the updated one
+    if (isEdit.edit) {
+      removeTransaction(isEdit.transaction.id);
+    }
+
     addTransaction({ name, amount });
 
     // reset form
