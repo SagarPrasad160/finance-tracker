@@ -17,7 +17,19 @@ import {
 
 export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
+  const [isEdit, setIsEdit] = useState({
+    edit: false,
+    transaction: null,
+  });
   const { user } = useAuthContext();
+
+  const handleEdit = (transaction) => {
+    setIsEdit({
+      ...isEdit,
+      edit: true,
+      transaction,
+    });
+  };
 
   useEffect(() => {
     let ref;
@@ -53,7 +65,13 @@ export const TransactionProvider = ({ children }) => {
 
   return (
     <TransactionContext.Provider
-      value={{ transactions, addTransaction, removeTransaction }}
+      value={{
+        transactions,
+        addTransaction,
+        removeTransaction,
+        handleEdit,
+        isEdit,
+      }}
     >
       {children}
     </TransactionContext.Provider>
