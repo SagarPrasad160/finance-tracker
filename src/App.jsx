@@ -2,7 +2,7 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
-
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Navbar from "./components/Navbar";
 
 import { useAuthContext } from "./context/useAuthContext";
@@ -41,6 +41,7 @@ function App() {
               path="/profile"
               element={user ? <Profile /> : <Navigate to="/login" />}
             />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
           <ToastContainer />
         </Router>

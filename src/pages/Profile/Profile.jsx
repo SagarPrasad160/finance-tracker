@@ -96,7 +96,7 @@ function Profile() {
             onChange={(e) => setCurrentPassword(e.target.value)}
           />
         </label>
-        <button className="btn">update</button>
+        <button className="btn-normal">update</button>
       </form>
       {!user.emailVerified && (
         <button className="btn-verification" onClick={handleSendVerification}>

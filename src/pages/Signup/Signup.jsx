@@ -49,11 +49,11 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </label>
-      <button className="btn" hidden={isPending}>
+      <button className="btn-normal" hidden={isPending}>
         Sign In
       </button>
       {isPending && (
-        <button className="btn" disabled>
+        <button className="btn-normal" disabled>
           Signing Up...
         </button>
       )}

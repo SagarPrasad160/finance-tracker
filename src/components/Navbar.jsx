@@ -10,6 +10,11 @@ function Navbar() {
   const { user } = useAuthContext();
 
   const navigate = useNavigate();
+
+  const isProfile = (path) => {
+    return path === window.location.pathname ? "active" : "normal";
+  };
+
   return (
     <nav className={styles.navbar}>
       <ul>
@@ -29,7 +34,7 @@ function Navbar() {
         {user && (
           <li>
             Hello,{user.displayName}
-            <button className="btn" onClick={logout}>
+            <button className="btn-normal" onClick={logout}>
               Logout
             </button>
           </li>
@@ -37,7 +42,10 @@ function Navbar() {
         {user && (
           <li>
             {" "}
-            <button className="btn" onClick={() => navigate("/profile")}>
+            <button
+              className={`btn-${isProfile("/profile")}`}
+              onClick={() => navigate("/profile")}
+            >
               {" "}
               Profile
             </button>
