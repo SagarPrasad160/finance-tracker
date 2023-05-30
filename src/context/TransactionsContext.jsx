@@ -1,5 +1,24 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useReducer } from "react";
 import PropTypes from "prop-types";
+
+const toggleReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_TOGGLE":
+      return {
+        toggle: true,
+      };
+    case "REMOVE_TOGGLE":
+      return {
+        toggle: false,
+      };
+    case "TOGGLE":
+      return {
+        toggle: !state.toggle,
+      };
+    default:
+      return state;
+  }
+};
 
 const TransactionContext = createContext();
 import { useAuthContext } from "./useAuthContext";
@@ -21,6 +40,32 @@ export const TransactionProvider = ({ children }) => {
     edit: false,
     transaction: null,
   });
+
+  const initialState = {
+    toggle: false,
+  };
+  const [state, dispatch] = useReducer(toggleReducer, initialState);
+
+  useEffect(() => {
+    const expenseTotal = transactions.reduce((acc, curr) => {
+      return acc + parseInt(curr.amount);
+    }, 0);
+    if (expenseTotal > 1000) {
+      dispatch({ type: "SET_TOGGLE" });
+    } else {
+      dispatch({ type: "REMOVE_TOGGLE" });
+    }
+  }, [transactions]);
+
+  useEffect(() => {
+    console.log("toggle changed");
+    if (document.querySelector("body").classList.contains("toggle")) {
+      document.querySelector("body").classList.remove("toggle");
+    } else {
+      document.querySelector("body").classList.add("toggle");
+    }
+  }, [state.toggle]);
+
   const { user } = useAuthContext();
 
   const handleEdit = (transaction) => {
@@ -71,6 +116,8 @@ export const TransactionProvider = ({ children }) => {
         removeTransaction,
         handleEdit,
         isEdit,
+        state,
+        dispatch,
       }}
     >
       {children}

@@ -5,11 +5,20 @@ import { useLogout } from "../hooks/useLogout";
 
 import { useAuthContext } from "../context/useAuthContext";
 
+import { BiToggleRight } from "react-icons/bi";
+
+import { useContext } from "react";
+import TransactionContext from "../context/TransactionsContext";
 function Navbar() {
   const { logout } = useLogout();
   const { user } = useAuthContext();
-
   const navigate = useNavigate();
+
+  const { dispatch } = useContext(TransactionContext);
+
+  const handleClick = () => {
+    dispatch({ type: "TOGGLE" });
+  };
 
   const isProfile = (path) => {
     return path === window.location.pathname ? "active" : "normal";
@@ -32,12 +41,19 @@ function Navbar() {
         )}
 
         {user && (
-          <li>
-            Hello,{user.displayName}
-            <button className="btn-normal" onClick={logout}>
-              Logout
-            </button>
-          </li>
+          <>
+            <li>
+              Hello,{user.displayName}
+              <button className="btn-normal" onClick={logout}>
+                Logout
+              </button>
+            </li>
+            <li>
+              <button className="btn-normal" onClick={handleClick}>
+                <BiToggleRight />
+              </button>
+            </li>
+          </>
         )}
         {user && (
           <li>

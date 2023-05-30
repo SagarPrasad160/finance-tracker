@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import styles from "./Home.module.css";
 
-import { HiPencil } from "react-icons/hi";
-
 import { useContext } from "react";
 import TransactionContext from "../../context/TransactionsContext";
+
+import { HiPencil } from "react-icons/hi";
+
 function TransactionList({ transactions }) {
   const { removeTransaction, handleEdit } = useContext(TransactionContext);
 
