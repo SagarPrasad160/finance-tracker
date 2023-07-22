@@ -7,7 +7,6 @@ import { onAuthStateChanged } from "firebase/auth";
 const AuthContext = createContext();
 
 const authReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "AUTH_IS_READY":
       return {
@@ -42,8 +41,6 @@ export const AuthProvider = ({ children }) => {
       unsub();
     });
   }, []);
-
-  console.log(state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

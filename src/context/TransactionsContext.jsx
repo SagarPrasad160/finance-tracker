@@ -58,7 +58,6 @@ export const TransactionProvider = ({ children }) => {
   }, [transactions]);
 
   useEffect(() => {
-    console.log("toggle changed");
     if (document.querySelector("body").classList.contains("toggle")) {
       document.querySelector("body").classList.remove("toggle");
     } else {
@@ -82,7 +81,6 @@ export const TransactionProvider = ({ children }) => {
 
     if (user) {
       ref = query(ref, where("uid", "==", user.uid));
-      console.log("user");
 
       onSnapshot(ref, (snapshot) => {
         let results = [];
