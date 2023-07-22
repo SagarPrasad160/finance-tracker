@@ -12,6 +12,11 @@
   max-width: 960px;
   align-items: center;
 }
+
+.navlinks {
+  display: flex;
+}
+
 .title {
   margin-right: auto;
   font-weight: bold;
@@ -25,4 +30,13 @@
   color: #333;
   text-decoration: none;
   margin-right: 16px;
+}
+
+@media (max-width: 767px) {
+  .navbar ul {
+    flex-direction: column;
+  }
+  .title {
+    margin: 0 auto;
+  }
 }

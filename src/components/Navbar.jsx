@@ -29,44 +29,46 @@ function Navbar() {
       <ul>
         <li className={styles.title}>financeTracker</li>
 
-        {!user && (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-          </>
-        )}
+        <div className={styles.navlinks}>
+          {!user && (
+            <>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Signup</Link>
+              </li>
+            </>
+          )}
 
-        {user && (
-          <>
+          {user && (
+            <>
+              <li>
+                Hello,{user.displayName}
+                <button className="btn-normal" onClick={logout}>
+                  Logout
+                </button>
+              </li>
+              <li>
+                <button className="btn-normal" onClick={handleClick}>
+                  <BiToggleRight />
+                </button>
+              </li>
+            </>
+          )}
+          {user && (
             <li>
-              Hello,{user.displayName}
-              <button className="btn-normal" onClick={logout}>
-                Logout
-              </button>
-            </li>
-            <li>
-              <button className="btn-normal" onClick={handleClick}>
-                <BiToggleRight />
-              </button>
-            </li>
-          </>
-        )}
-        {user && (
-          <li>
-            {" "}
-            <button
-              className={`btn-${isProfile("/profile")}`}
-              onClick={() => navigate("/profile")}
-            >
               {" "}
-              Profile
-            </button>
-          </li>
-        )}
+              <button
+                className={`btn-${isProfile("/profile")}`}
+                onClick={() => navigate("/profile")}
+              >
+                {" "}
+                Profile
+              </button>
+            </li>
+          )}
+        </div>
       </ul>
     </nav>
   );

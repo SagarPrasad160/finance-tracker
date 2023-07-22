@@ -69,7 +69,7 @@ function Home() {
           {transactions && <TransactionList transactions={transactions} />}
         </div>
         <div className={styles.sidebar}>
-          <button id="btn" onClick={downloadExpenses}>
+          <button id="btn-download" onClick={downloadExpenses}>
             Download
           </button>
           <TransactionForm />
