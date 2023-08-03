@@ -1,14 +1,24 @@
 .container {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr; /* Equal height rows */
   max-width: 960px;
   margin: 60px auto;
+  gap: 20px;
 }
+
 .content {
-  padding-right: 30px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+
 .sidebar {
-  padding-left: 30px;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .sidebar form {
   padding: 20px;
@@ -108,12 +118,10 @@
 
 @media (max-width: 767px) {
   .container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Adjust columns for smaller screens */
+    grid-template-rows: auto; /* Reset rows */
   }
   .sidebar {
-    margin: 0 auto;
-  }
-  .content {
-    margin: auto;
+    margin: 20px auto; /* Adjust margin */
   }
 }

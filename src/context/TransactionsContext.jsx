@@ -94,10 +94,22 @@ export const TransactionProvider = ({ children }) => {
 
   const addTransaction = async (transaction) => {
     const ref = collection(db, "transactions");
+
+    // Format the date to "month date year" format
+    const formattedDate = new Date(transaction.date).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    );
+
     await addDoc(ref, {
       name: transaction.name,
       amount: transaction.amount,
       uid: user.uid,
+      date: formattedDate, // Store the formatted date
     });
   };
 

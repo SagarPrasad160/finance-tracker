@@ -5,6 +5,7 @@ import TransactionContext from "../../context/TransactionsContext";
 function TransactionForm() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
 
   const { addTransaction, isEdit, removeTransaction } =
     useContext(TransactionContext);
@@ -24,12 +25,14 @@ function TransactionForm() {
       removeTransaction(isEdit.transaction.id);
     }
 
-    addTransaction({ name, amount });
+    addTransaction({ name, amount, date });
 
     // reset form
     setName("");
     setAmount("");
   };
+
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
 
   return (
     <>
@@ -49,6 +52,16 @@ function TransactionForm() {
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+          />
+        </label>
+        <label>
+          <span>Date:</span>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            min="2016-12-10" // Minimum date
+            max={today} // Maximum date
           />
         </label>
         <button>Add transaction</button>
