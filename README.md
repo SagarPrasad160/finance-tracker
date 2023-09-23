@@ -14,7 +14,7 @@ The Finance Tracker App is a web application built with React.js, designed to he
 - Expense Management: Add, edit, and delete transactions with ease using the intuitive user interface.
 
 - Export to CSV: Download your expenses in CSV format to keep records or analyze spending patterns offline.
-- 
+  
 ## Technologies Used
 
 - React.js: Building the user interface and components for a seamless user experience.
