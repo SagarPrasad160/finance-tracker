@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+const apiKey = import.meta.env.VITE_APP_API_KEY;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCnClZ0n7O7UDhufbCnUQ0KCLFJRQRsxFg",
+  apiKey: apiKey,
   authDomain: "finance-tracker-fb52c.firebaseapp.com",
   projectId: "finance-tracker-fb52c",
   storageBucket: "finance-tracker-fb52c.appspot.com",

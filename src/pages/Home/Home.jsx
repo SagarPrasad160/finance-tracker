@@ -9,6 +9,7 @@ import TransactionList from "./TransactionList";
 
 import { convertToCSV } from "../../utils/convertToCSV";
 import { downloadExpenses } from "../../utils/downloadExpenses";
+import { getRandomColor } from "../../utils/getRandomColor";
 
 function Home() {
   const { transactions } = useContext(TransactionContext);
@@ -32,6 +33,8 @@ function Home() {
         {
           label: "Monthly Expenses",
           data: transactions.map((expense) => expense.amount),
+          // eslint-disable-next-line no-unused-vars
+          backgroundColor: transactions.map((_transaction) => getRandomColor()),
         },
       ],
     });
